@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      uri:  mongodb://root:toor@localhost:27017/finance?authSource=admin&retryWrites=true&w=majority
+
+springdoc:
+  packages-to-scan: com.caionastu.finance
+  swagger-ui:
+    path: /swagger-ui
