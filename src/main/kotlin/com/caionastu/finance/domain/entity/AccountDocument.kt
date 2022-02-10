@@ -8,6 +8,8 @@ data class AccountDocument(
     val id: String,
     val number: String,
     val digit: String,
-    val bankCode: String,
-    val balance: BigDecimal
+    val balance: BigDecimal,
+    val bankCode: String? = null,
+    val name: String? = null,
+    val deleted: Boolean = false
 )

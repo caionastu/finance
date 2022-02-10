@@ -1,13 +1,12 @@
 package com.caionastu.finance.domain.service
 
+import com.caionastu.finance.application.web.model.request.CardFilterRequest
 import com.caionastu.finance.domain.entity.CardDocument
 import com.caionastu.finance.domain.exception.BusinessException
 import com.caionastu.finance.domain.exception.NotFoundException
 import com.caionastu.finance.domain.repository.AccountRepository
 import com.caionastu.finance.domain.repository.CardRepository
 import com.caionastu.finance.resources.isPositive
-import org.springframework.data.domain.Page
-import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
@@ -18,17 +17,8 @@ class CardService(
     private val accountRepository: AccountRepository
 ) {
 
-    fun findAll(pageable: Pageable = Pageable.unpaged()): Page<CardDocument> {
-        val page = repository.findAll(pageable)
-
-        val list = page.filter { card -> !card.deleted }
-            .toList()
-        return PageImpl(
-            list,
-            pageable,
-            list.size.toLong()
-        )
-    }
+    fun findAll(pageable: Pageable, filterRequest: CardFilterRequest) =
+        repository.findAllByDeleted(pageable, filterRequest.deleted)
 
     fun findById(id: String) = repository.findByIdAndDeleted(id)
         ?: throw NotFoundException("card.exception.notFound", id)
