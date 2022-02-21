@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface CardRepository : MongoRepository<CardDocument, String> {
     fun existsByFinalNumberAndDeleted(finalNumber: String, deleted: Boolean = false): Boolean
-    fun findByIdAndDeleted(id: String, deleted: Boolean = false): CardDocument?
+    fun findByIdAndDeleted(id: String, deleted: Boolean): CardDocument?
     fun findAllByDeleted(pageable: Pageable, deleted: Boolean): Page<CardDocument>
 }

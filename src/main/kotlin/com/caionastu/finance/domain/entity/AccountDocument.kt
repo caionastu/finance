@@ -12,4 +12,6 @@ data class AccountDocument(
     val bankCode: String? = null,
     val name: String? = null,
     val deleted: Boolean = false
-)
+) {
+    fun hasBalance(amountToTransfer: BigDecimal) = balance.minus(amountToTransfer) >= BigDecimal.ZERO
+}

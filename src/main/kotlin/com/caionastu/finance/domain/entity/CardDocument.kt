@@ -7,16 +7,10 @@ data class CardDocument(
     @Id
     val id: String,
     val finalNumber: String,
-    val type: CardType,
     val name: String,
-    val creditLimit: BigDecimal? = null,
-    val debitAccountId: String? = null,
+    val maxLimit: BigDecimal,
+    val currentLimit: BigDecimal = BigDecimal.ZERO,
     val deleted: Boolean = false
 ) {
-    fun isDebit() = type == CardType.DEBIT
-}
-
-enum class CardType {
-    CREDIT,
-    DEBIT
+    fun hasLimit(amountToTransfer: BigDecimal) = currentLimit.plus(amountToTransfer) <= maxLimit
 }

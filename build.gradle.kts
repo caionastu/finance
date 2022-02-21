@@ -5,7 +5,7 @@ plugins {
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.6.10"
     kotlin("plugin.spring") version "1.6.10"
-//    kotlin("kapt") version "1.6.10"
+    kotlin("kapt") version "1.6.10"
 }
 
 group = "com.caionastu"
@@ -29,11 +29,13 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-//    implementation("com.querydsl:querydsl-mongodb:5.0.0")
-//    implementation("com.querydsl:querydsl-apt:5.0.0")
-//    implementation("com.querydsl:querydsl-core:5.0.0")
-//
-//    kapt("com.querydsl:querydsl-apt:5.0.0:general")
+    implementation("com.querydsl:querydsl-mongodb:5.0.0") {
+        exclude(group = "org.mongodb")
+    }
+    implementation("com.querydsl:querydsl-apt:5.0.0")
+    implementation("com.querydsl:querydsl-core:5.0.0")
+
+    kapt("com.querydsl:querydsl-apt:5.0.0:general")
 }
 
 tasks.withType<KotlinCompile> {

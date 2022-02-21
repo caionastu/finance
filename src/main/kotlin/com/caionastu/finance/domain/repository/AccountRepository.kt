@@ -11,5 +11,6 @@ interface AccountRepository : MongoRepository<AccountDocument, String> {
     fun existsByNumber(number: String): Boolean
     fun existsByNumberAndIdNot(number: String, id: String): Boolean
     fun findAllByDeleted(pageable: Pageable, deleted: Boolean): Page<AccountDocument>
-    fun findByIdAndDeleted(id: String, deleted: Boolean = false): AccountDocument?
+    fun findByIdAndDeleted(id: String, deleted: Boolean): AccountDocument?
+    fun existsByIdAndDeleted(id: String, deleted: Boolean): Boolean
 }
